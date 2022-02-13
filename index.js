@@ -1,4 +1,4 @@
-let weather = document.getElementById('weather');
+let weath = document.getElementById('weather');
 
 
 
@@ -15,27 +15,26 @@ function getData() {
         return response.json();
     }).then((data)=>{
         console.log('Inside second then running in beckground');
-        console.log(data);
+        let weatherData = data.weather;
+        console.log(weatherData);
       
-        
-           
-        let weatherData = `<div class="card-header">
+        weatherData.forEach(element => {
+          weath.innerHTML = `<div class="card-header">
             Weather
           </div>
           <div class="card-body">
-            <h5 class="card-title">${data['weather']}</h5>
-            <p class="card-text">${data['description']}</p>
+            <h5 class="card-title">${element['main']}</h5>
+            <p class="card-text">${element['description']}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
           <div class="card-footer text-muted">
-            2 days ago
+            ${element['icon']}
           </div>
-        </div>
-            `;
+        </div>`
+        });
            
-       
-
-        content.innerHTML = weatherData;
+        
+          
     })
 
    
